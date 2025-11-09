@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
                         String fontName = fontFile.getName().substring(0, fontFile.getName().lastIndexOf('.'));
 
+						if (!fontName.toLowerCase().contains("noto")) {
+						    continue;
+						}
+
                         // Only add if not already in the list
                         if (uniqueFonts.add(fontName)) {
                             tempNames.add(fontName);
@@ -63,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Add some standard generic font names as fallbacks
         String[] defaultFonts = {
-            "default", "default-bold", "sans", "sans-serif",
-            "serif", "monospace", "casual", "cursive", "sans-serif-condensed"
+            // "default", "default-bold", "sans", "sans-serif",
+            // "serif", "monospace", "casual", "cursive", "sans-serif-condensed"
         };
 
         for (String font : defaultFonts) {

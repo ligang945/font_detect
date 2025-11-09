@@ -59,7 +59,7 @@ public class FontAdapter extends RecyclerView.Adapter<FontAdapter.FontViewHolder
         }
 
         // Set the sample text to show the font
-        holder.fontSample.setText("The quick brown fox jumps over the lazy dog 0123456789");
+        holder.fontSample.setText("The quick brown fox jumps over the lazy dog 0123456789\n用于中文字体测试的文字通常是包含丰富笔画和偏旁的常用汉字组合");
     }
 
     @Override
