@@ -50,6 +50,21 @@ android {
             outputFileName = "font-detect-${variant.versionName}.apk"
         }
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (variant.buildType.name == 'release') {
+                def aabFile = file("${project.buildDir}/outputs/bundle/${variant.name}/app-${variant.name}.aab")
+                def newAabFile = file("${project.buildDir}/outputs/bundle/${variant.name}/font-detect-${variant.versionName}.aab")
+
+                variant.assembleProvider.get().doLast {
+                    if (aabFile.exists()) {
+                        aabFile.renameTo(newAabFile)
+                    }
+                }
+            }
+        }
+    }
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
