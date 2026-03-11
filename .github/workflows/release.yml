@@ -50,12 +50,16 @@ jobs:
 
     - name: Get version from tag
       id: get_version
-      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/}
+        VERSION_NO_V=${VERSION#v}
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "VERSION_NO_V=$VERSION_NO_V" >> $GITHUB_OUTPUT
 
     - name: Rename AAB file
       run: |
         cd app/build/outputs/bundle/release
-        mv app-release.aab font-detect-${{ steps.get_version.outputs.VERSION }}.aab
+        mv app-release.aab font-detect-${{ steps.get_version.outputs.VERSION_NO_V }}.aab
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
