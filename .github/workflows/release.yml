@@ -52,17 +52,12 @@ jobs:
       id: get_version
       run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
-    - name: Rename APK and AAB
-      run: |
-        mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/font-detect-${{ steps.get_version.outputs.VERSION }}.apk
-        mv app/build/outputs/bundle/release/app-release.aab app/build/outputs/bundle/release/font-detect-${{ steps.get_version.outputs.VERSION }}.aab
-
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          app/build/outputs/apk/release/font-detect-${{ steps.get_version.outputs.VERSION }}.apk
-          app/build/outputs/bundle/release/font-detect-${{ steps.get_version.outputs.VERSION }}.aab
+          app/build/outputs/apk/release/*.apk
+          app/build/outputs/bundle/release/*.aab
         name: Release ${{ steps.get_version.outputs.VERSION }}
         draft: false
         prerelease: false

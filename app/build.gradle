@@ -44,6 +44,12 @@ android {
             }
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "font-detect-${variant.versionName}.apk"
+        }
+    }
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
